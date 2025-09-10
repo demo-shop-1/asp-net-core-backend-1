@@ -12,6 +12,32 @@
           "Product"
         ],
         "summary": "Create a new product",
+        "description": "We need an object for creating",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/product/{sku}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get one product",
+        "description": "We will get one product",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "SKU code product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -5,8 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)</OpenApiDocumentsDirectory>
-	  <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
-	  
+	  <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>	  
   </PropertyGroup>
 
   <ItemGroup>

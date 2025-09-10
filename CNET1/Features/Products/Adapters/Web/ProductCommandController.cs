@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CNET1.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CNET1.Features.Products.Adapters.Web
 {
-    [Route("product")]
     [ApiController]
+    [Route("product")]
     [Tags("Product")]
-    public class ProductCommandController : ControllerBase
+    public class ProductCommandController(ILogger<ProductCommandController> logger) : AppControllerUtil<ProductCommandController>(logger)
     {
 
-        
         [HttpPost("create")]
-        [Tags("create")]
         [EndpointSummary("Create a new product")]
         [EndpointDescription("We need an object for creating")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult CreateProduct()
         {
-            // Implementation for creating a product
+            StartMethod(nameof(CreateProduct));
+            // Implementation for getting a product by ID
+            EndMethod(nameof(CreateProduct));
             return Ok("Product created");
         }
     }
