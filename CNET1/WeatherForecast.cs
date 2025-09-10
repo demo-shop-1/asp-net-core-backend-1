@@ -1,4 +1,4 @@
-namespace AppRunner
+namespace CNET1
 {
     public class WeatherForecast
     {

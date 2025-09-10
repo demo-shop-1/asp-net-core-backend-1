@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AppRunner.Controllers
+namespace CNET1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -18,7 +18,14 @@ namespace AppRunner.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get weather
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="404">If there is no forecast</response>
         [HttpGet(Name = "GetWeatherForecast")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

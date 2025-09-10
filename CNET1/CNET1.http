@@ -1,0 +1,6 @@
+@CNET1_HostAddress = http://localhost:5126
+
+GET {{CNET1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
