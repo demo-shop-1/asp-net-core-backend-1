@@ -1,4 +1,6 @@
 
+using Scalar.AspNetCore;
+
 namespace CNET1
 {
     public class Program
@@ -11,7 +13,15 @@ namespace CNET1
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            builder.Services.AddOpenApi(options =>
+            {
+                options.AddDocumentTransformer((document, context, CancellationToken) => {
+                    document.Info.Title = "Demo Shop 1";
+                    document.Info.Description = "Backend with ASP.NET 9 Core Web API";
+                    document.Info.Version = "v1";
+                    return Task.CompletedTask;
+                });
+            });
 
             var app = builder.Build();
 
@@ -19,9 +29,12 @@ namespace CNET1
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
-                app.UseSwaggerUI(options =>
+
+                app.MapScalarApiReference(options =>
                 {
-                    options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI v1");
+                    options.WithTitle("Docs - Demo-Shop-1")
+                    .WithTheme(ScalarTheme.DeepSpace)
+                    .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
                 });
             }
 
