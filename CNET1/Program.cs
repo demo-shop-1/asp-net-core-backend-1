@@ -46,7 +46,7 @@ namespace CNET1
 
                 app.MapScalarApiReference(options =>
                 {
-                    options.WithTitle("Docs - Demo-Shop-1")
+                    options.WithTitle("Scalar Docs API for Demo-Shop-1")
                     .WithTheme(ScalarTheme.DeepSpace)
                     .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
                 });
@@ -55,7 +55,6 @@ namespace CNET1
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
