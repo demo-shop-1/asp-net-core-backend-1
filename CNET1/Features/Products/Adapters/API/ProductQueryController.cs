@@ -11,7 +11,7 @@ namespace CNET1.Features.Products.Adapters.Web
     [Tags("Product")]
     public class ProductQueryController(
         IProductQueryService productQueryApplication,
-        ILogger<ProductQueryController> logger) : AppControllerUtil<ProductQueryController>(logger)
+        AppBaseUtil<ProductQueryController> baseUtil) : AppControllerUtil<ProductQueryController>(baseUtil)
     {
         private readonly IProductQueryService _productQueryService = productQueryApplication;
 

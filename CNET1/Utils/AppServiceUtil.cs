@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace CNET1.Utils
+﻿namespace CNET1.Utils
 {
-    public abstract class AppControllerUtil<T>(
-        [FromKeyedServices("controller")] AppBaseUtil<T> baseUtil)
-        : ControllerBase
+    public abstract class AppServiceUtil<T>([FromKeyedServices("service")] AppBaseUtil<T> baseUtil)
     {
         protected readonly AppBaseUtil<T> BaseUtil = baseUtil;
 

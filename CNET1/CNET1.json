@@ -13,6 +13,26 @@
         ],
         "summary": "Create a new product",
         "description": "We need an object for creating",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCreateRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCreateRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCreateRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -46,7 +66,52 @@
       }
     }
   },
-  "components": { },
+  "components": {
+    "schemas": {
+      "ProductCreateRequestDTO": {
+        "required": [
+          "sku",
+          "name",
+          "categoryId",
+          "description",
+          "unitPrice",
+          "unitsInStock"
+        ],
+        "type": "object",
+        "properties": {
+          "sku": {
+            "minLength": 4,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "minimum": 1,
+            "type": "number",
+            "format": "double"
+          },
+          "unitsInStock": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
   "tags": [
     {
       "name": "Product"

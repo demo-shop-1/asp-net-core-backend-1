@@ -1,4 +1,6 @@
-
+using CNET1.Features.Products.Application;
+using CNET1.Features.Products.Domain.Services;
+using CNET1.Utils;
 using Microsoft.Extensions.Logging.Console;
 using Scalar.AspNetCore;
 
@@ -36,6 +38,9 @@ namespace CNET1
                 });
             });
 
+            // Dependency Injection for Application Services
+            ConfigureServices(builder.Services);
+
             var app = builder.Build();
             app.Logger.LogInformation("Application Starting...");
 
@@ -59,6 +64,17 @@ namespace CNET1
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            // Util Services
+            services.AddScoped(typeof(AppBaseUtil<>), typeof(ServiceHelper<>));
+            services.AddKeyedScoped(typeof(AppBaseUtil<>), "controller", typeof(ControllerHelper<>));
+            services.AddKeyedScoped(typeof(AppBaseUtil<>), "service", typeof(ServiceHelper<>));
+
+            // Services core
+            services.AddScoped<IProductCommandService, ProductCommandApplication>();
         }
     }
 }
