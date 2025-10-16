@@ -4,7 +4,7 @@
     public class AppException : Exception
     {
         public AppException() { }
-        public AppException(string message) : base(message) { }
-        public AppException(string message, Exception inner) : base(message, inner) { }
+        public AppException(string Message) : base(Message) { }
+        public AppException(string MessageCode, string MessageRaw) : base(MessageCode, new Exception(MessageRaw)) { }
     }
 }

@@ -1,6 +1,13 @@
+using CNET1.Configuration;
+using CNET1.Exceptions;
+using CNET1.Features.Products.Adapters.DB;
 using CNET1.Features.Products.Application;
+using CNET1.Features.Products.Application.Validations;
+using CNET1.Features.Products.Domain.Ports;
+using CNET1.Features.Products.Domain.PORTS;
 using CNET1.Features.Products.Domain.Services;
 using CNET1.Utils;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Console;
 using Scalar.AspNetCore;
 
@@ -38,6 +45,12 @@ namespace CNET1
                 });
             });
 
+            // Set DbContext
+            string connection = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
+            builder.Services.AddDbContext<AppDbContext>(options =>
+              options.UseMySql(connection, ServerVersion.AutoDetect(connection))
+            );
+
             // Dependency Injection for Application Services
             ConfigureServices(builder.Services);
 
@@ -57,6 +70,9 @@ namespace CNET1
                 });
             }
 
+            // Global Exception Handler
+            app.UseMiddleware<AppExceptionHandler>();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
@@ -73,8 +89,12 @@ namespace CNET1
             services.AddKeyedScoped(typeof(AppBaseUtil<>), "controller", typeof(ControllerHelper<>));
             services.AddKeyedScoped(typeof(AppBaseUtil<>), "service", typeof(ServiceHelper<>));
 
-            // Services core
+            // Business Services
             services.AddScoped<IProductCommandService, ProductCommandApplication>();
+            services.AddScoped<IProductQueryService, ProductQueryApplication>();
+            services.AddScoped<IProductCommandOutRepository, ProductCommandRepository>();
+            services.AddScoped<IProductQueryOutRepository, ProductQueryRepository>();
+            services.AddScoped<IProductValidationService, ProductValidationApplication>();
         }
     }
 }

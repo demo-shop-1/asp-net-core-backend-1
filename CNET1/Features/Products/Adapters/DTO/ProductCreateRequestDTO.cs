@@ -16,6 +16,7 @@ namespace CNET1.Features.Products.Adapters.DTO
         public required int CategoryId { get; set; }
 
         [Required]
+        [MaxLength(2000)]
         public required string Description { get; set; }
 
         [Required]
@@ -25,6 +26,6 @@ namespace CNET1.Features.Products.Adapters.DTO
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "UnitsInStock must be a non-negative integer.")]
         public required int UnitsInStock { get; set; }
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; }
     }
 }

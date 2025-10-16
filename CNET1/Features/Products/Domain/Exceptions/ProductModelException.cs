@@ -2,10 +2,7 @@
 
 namespace CNET1.Features.Products.Domain.Exceptions
 {
-    public class ProductModelException : AppException
+    public class ProductModelException(string message) : AppException(message)
     {
-        public ProductModelException(string message) : base(message)
-        {
-        }
     }
 }

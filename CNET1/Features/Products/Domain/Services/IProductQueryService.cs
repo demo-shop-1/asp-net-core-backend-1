@@ -5,5 +5,6 @@ namespace CNET1.Features.Products.Domain.Services
     public interface IProductQueryService
     {
         Task<ProductModel> GetOneProductAsync(string sku);
+        Task<ProductModel?> FindBySkuAsync(string sku);
     }
 }

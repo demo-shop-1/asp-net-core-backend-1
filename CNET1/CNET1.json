@@ -36,6 +36,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -61,6 +64,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -92,6 +98,7 @@
             "format": "int32"
           },
           "description": {
+            "maxLength": 2000,
             "type": "string"
           },
           "unitPrice": {
@@ -106,7 +113,8 @@
             "format": "int32"
           },
           "imageUrl": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       }

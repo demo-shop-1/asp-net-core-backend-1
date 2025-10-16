@@ -5,13 +5,13 @@ using CNET1.Features.Products.Domain.Services;
 using CNET1.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CNET1.Features.Products.Adapters.Web
+namespace CNET1.Features.Products.Adapters.API
 {
     [Route("product")]
     [ApiController]
     [Tags("Product")]
     public class ProductCommandController(
-        IProductCommandService productCommandApplication,
+        IProductCommandService productCommandApp,
         AppBaseUtil<ProductCommandController> baseUtil)
         : AppControllerUtil<ProductCommandController>(baseUtil)
     {
@@ -20,14 +20,15 @@ namespace CNET1.Features.Products.Adapters.Web
         [EndpointSummary("Create a new product")]
         [EndpointDescription("We need an object for creating")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> CreateProduct(
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateOneProductAsync(
             [FromBody] ProductCreateRequestDTO request)
         {
-            StartMethod(nameof(CreateProduct));
+            StartMethod(nameof(CreateOneProductAsync));
 
-            ProductModel productCreated = await productCommandApplication.CreateProductAsync(ProductMapper.ToProductModel(request));
+            ProductModel productCreated = await productCommandApp.CreateOneProductAsync(ProductMapper.ToProductModel(request));
 
-            EndMethod(nameof(CreateProduct));
+            EndMethod(nameof(CreateOneProductAsync));
             return Ok(ProductMapper.ToProductCreateResponseDTO(productCreated));
         }
     }
